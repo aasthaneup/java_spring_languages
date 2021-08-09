@@ -17,13 +17,11 @@ import com.assignment.languages.services.LanguageService;
 
 @Controller
 public class LanguageController {
-
 	private final LanguageService langServ;
-
 	public LanguageController(LanguageService langServ) {
 		this.langServ = langServ;
 	}
-	
+//	to home page
 	@RequestMapping("/languages")
 	public String main(Model model) {
 		List<Language> languages = langServ.allLanguages();
@@ -31,7 +29,7 @@ public class LanguageController {
 		model.addAttribute("language", new Language());
 		return "index.jsp";
 	}
-	
+//	add a language
 	@RequestMapping(value="/languages", method=RequestMethod.POST)
 	public String createLanguage(@Valid @ModelAttribute("language") Language lang, BindingResult result, Model model) {
 		List<Language> languages = langServ.allLanguages();
@@ -43,13 +41,13 @@ public class LanguageController {
 			return "redirect:/languages";
 		}
 	}
-	
+//	edit page
 	@RequestMapping("languages/{id}/edit")
 	public String edit(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("language", langServ.findLanguage(id));
 		return "edit.jsp";
 	}
-	
+//	update a language
 	@RequestMapping(value="/languages/{id}", method=RequestMethod.PUT)
 	public String updateLanguage(@Valid @ModelAttribute("language") Language lang, BindingResult result) {
 		if(result.hasErrors()) {
@@ -59,13 +57,13 @@ public class LanguageController {
 			return "redirect:/languages";
 		}
 	}
-	
+//	view details of a language
 	@RequestMapping("/languages/{id}")
 	public String viewLanguages(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("language", langServ.findLanguage(id));
 		return "view.jsp";
 	}
-	
+//	delete a language
 	@RequestMapping(value="/languages/{id}", method=RequestMethod.DELETE)
 	public String deleteLanguage(@PathVariable("id") Long id) {
 		langServ.deleteLanguage(id);
