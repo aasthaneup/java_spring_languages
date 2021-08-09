@@ -10,21 +10,16 @@ import com.assignment.languages.repositories.LanguageRepository;
 
 @Service
 public class LanguageService {
-
 	private final LanguageRepository langRepo;
-	
 	public LanguageService(LanguageRepository langRepo) {
 		this.langRepo = langRepo;
 	}
-	
 	public List<Language> allLanguages(){
 		return langRepo.findAll();
 	}
-	
 	public Language saveLanguage(Language lang) {
 		return langRepo.save(lang);
 	}
-	
 	public Language findLanguage(Long id) {
 		Optional<Language> optLang = langRepo.findById(id);
 		if(optLang.isPresent()) {
@@ -33,7 +28,6 @@ public class LanguageService {
 			return null;
 		}
 	}
-	
 	public void deleteLanguage(Long id) {
 		langRepo.deleteById(id);
 	}

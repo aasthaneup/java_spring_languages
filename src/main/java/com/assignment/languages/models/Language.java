@@ -18,35 +18,32 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name="languages")
 public class Language {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
 	@Size(min=2, max=20)
 	private String name;
-	
 	@NotNull
 	@Size(min=2, max=20)
 	private String creator;
-	
 	@NotNull
 	private String currentVersion;
-	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yy-MM-dd")
 	private Date createdAt;
 	@DateTimeFormat(pattern="yy-MM-dd")
 	private Date updatedAt;
 	
+//	default and parameterized constructors
 	public Language() {
-		
 	}
 	public Language(String name, String creator, String currentVersion) {
 		this.name = name;
 		this.creator = creator;
 		this.currentVersion = currentVersion;
 	}
+//	pre and post persist methods
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
@@ -55,6 +52,7 @@ public class Language {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
+//	getters and setters
 	public Long getId() {
 		return id;
 	}
