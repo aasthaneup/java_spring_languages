@@ -43,7 +43,7 @@ public class Language {
 		this.creator = creator;
 		this.currentVersion = currentVersion;
 	}
-//	pre and post persist methods
+//	prePersist and preUpdate methods
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
